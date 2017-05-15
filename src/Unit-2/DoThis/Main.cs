@@ -13,7 +13,7 @@ namespace ChartApp
         private IActorRef _chartActor;
         private readonly AtomicCounter _seriesCounter = new AtomicCounter(1);
 
-        public Main()
+         public Main()
         {
             InitializeComponent();
         }
@@ -41,5 +41,11 @@ namespace ChartApp
         }
 
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var series = ChartDataHelper.RandomSeries("FakeSeries" + _seriesCounter.GetAndIncrement());
+            _chartActor.Tell(new ChartingActor.AddSeries(series));
+        }
     }
 }
